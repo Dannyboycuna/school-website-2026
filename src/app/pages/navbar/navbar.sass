@@ -1,0 +1,616 @@
+// ============================================================
+// 1. VARIABLES
+// ============================================================
+$primary-color: #1a5f7a;
+$secondary-color: #ffc107;
+$white: #ffffff;
+$text-color: #333;
+$shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+$hover-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+$transition: all 0.3s ease;
+
+// ============================================================
+// 2. DYNAMIC GRADIENT ANIMATIONS
+// ============================================================
+@keyframes gradientShift 
+    0% 
+        background-position: 0% 50%;
+    
+    25% 
+        background-position: 50% 0%;
+    
+    50% 
+        background-position: 100% 50%;
+    
+    75% 
+        background-position: 50% 100%;
+    
+    100% 
+        background-position: 0% 50%;
+    
+
+
+@keyframes gradientShiftSidebar 
+    0% 
+        background-position: 100% 0%;
+    
+    25% 
+        background-position: 50% 100%;
+    
+    50% 
+        background-position: 0% 50%;
+    
+    75% 
+        background-position: 50% 0%;
+    
+    100% 
+        background-position: 100% 0%;
+    
+
+
+@keyframes pulse 
+    0%,
+    100% 
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    
+    50% 
+        transform: translateX(-50%) scale(1.5);
+        opacity: 0.5;
+    
+
+
+@keyframes fadeIn 
+    from 
+        opacity: 0;
+    
+    to 
+        opacity: 1;
+    
+
+
+@keyframes glow 
+    0%,
+    100% 
+        box-shadow: 0 0 10px rgba($secondary-color, 0.3);
+    
+    50% 
+        box-shadow: 0 0 20px rgba($secondary-color, 0.6);
+    
+
+
+// ============================================================
+// 3. NAVBAR HEADER
+// ============================================================
+header.navbar 
+    background: linear-gradient(
+        -45deg,
+        #1a5f7a,
+        #2a7fa9,
+        #1a4f6a,
+        #3a8fb9,
+        #1a5f7a,
+        #2a7fa9
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+    color: $white;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    border-bottom: 3px solid rgba($secondary-color, 0.3);
+
+    .container 
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    
+
+
+// ============================================================
+// 4. LOGO STYLING
+// ============================================================
+.logo 
+    display: flex;
+    align-items: center;
+    height: 60px;
+    flex-shrink: 0;
+
+    a 
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        transition: $transition;
+        padding: 5px;
+        border-radius: 8px;
+
+        &:hover 
+            transform: scale(1.08) translateY(-2px);
+            background: rgba($white, 0.1);
+            backdrop-filter: blur(10px);
+        
+    
+
+    img 
+        height: 50px;
+        width: auto;
+        object-fit: contain;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        transition: $transition;
+
+        &:hover 
+            animation: glow 1.5s ease-in-out infinite;
+        
+    
+
+
+// ============================================================
+// 5. NAVIGATION MENU (Desktop)
+// ============================================================
+.nav-menu 
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    a 
+        color: $white;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 8px 12px;
+        border-radius: 6px;
+        border-bottom: 2px solid transparent;
+        transition: $transition;
+        position: relative;
+        white-space: nowrap;
+        font-size: 14px;
+
+        &:hover 
+            color: $secondary-color;
+            background: rgba($white, 0.1);
+            transform: translateY(-2px);
+            text-shadow: 0 0 20px rgba($secondary-color, 0.3);
+        
+
+        &.active 
+            color: $secondary-color;
+            background: rgba($secondary-color, 0.15);
+            font-weight: 600;
+
+            &::after 
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 20px;
+                height: 2px;
+                background: $secondary-color;
+                border-radius: 2px;
+                box-shadow: 0 0 10px rgba($secondary-color, 0.6);
+                animation: pulse 1.5s ease-in-out infinite;
+            
+        
+    
+
+
+// ============================================================
+// 6. NAV ACTIONS
+// ============================================================
+.nav-actions 
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+
+
+// ============================================================
+// 7. WHATSAPP BUTTON
+// ============================================================
+.whatsapp-btn 
+    background: linear-gradient(135deg, #25d366, #128C7E, #075E54);
+    background-size: 300% 300%;
+    animation: gradientShift 8s ease infinite;
+    color: $white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: $transition;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+    border: 1px solid rgba($white, 0.1);
+
+    i 
+        font-size: 18px;
+    
+
+    &:hover 
+        transform: scale(1.05) translateY(-2px);
+        box-shadow: 0 5px 15px rgba(37, 211, 102, 0.5);
+        border-color: rgba($white, 0.3);
+    
+
+    &:active 
+        transform: scale(0.98);
+    
+
+
+// ============================================================
+// 8. HAMBURGER MENU (Mobile/Tablet)
+// ============================================================
+.hamburger 
+    display: none; // Hidden by default, shown on mobile
+    flex-direction: column;
+    gap: 5px;
+    background: rgba($white, 0.1);
+    border: 2px solid rgba($white, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    transition: $transition;
+    backdrop-filter: blur(5px);
+
+    &:hover 
+        background: rgba($white, 0.2);
+        transform: scale(1.05);
+    
+
+    span 
+        display: block;
+        width: 25px;
+        height: 3px;
+        background: $white;
+        border-radius: 3px;
+        transition: $transition;
+        transform-origin: center;
+    
+
+    &.active 
+        background: rgba($secondary-color, 0.3);
+        border-color: $secondary-color;
+
+        span 
+            &:nth-child(1) 
+                transform: rotate(45deg) translate(5px, 6px);
+            
+            &:nth-child(2) 
+                opacity: 0;
+                transform: scaleX(0);
+            
+            &:nth-child(3) 
+                transform: rotate(-45deg) translate(5px, -6px);
+            
+        
+    
+
+
+// ============================================================
+// 9. SIDEBAR OVERLAY
+// ============================================================
+.sidebar-overlay 
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    animation: fadeIn 0.3s ease;
+
+    &.active 
+        display: block;
+    
+
+
+// ============================================================
+// 10. SIDEBAR
+// ============================================================
+.sidebar 
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 320px;
+    max-width: 85%;
+    height: 100vh;
+    z-index: 1000;
+    background: linear-gradient(
+        -45deg,
+        #1a5f7a,
+        #2a7fa9,
+        #1a4f6a,
+        #3a8fb9,
+        #1a5f7a
+    );
+    background-size: 400% 400%;
+    animation: gradientShiftSidebar 10s ease infinite;
+    padding: 20px;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    border-left: 3px solid rgba($secondary-color, 0.3);
+
+    &.active 
+        right: 0;
+    
+
+    .sidebar-header 
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 20px;
+        border-bottom: 2px solid rgba($white, 0.1);
+        margin-bottom: 20px;
+
+        .sidebar-logo 
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+        
+
+        .sidebar-close 
+            background: rgba($white, 0.1);
+            border: 2px solid rgba($white, 0.2);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: $transition;
+
+            &:hover 
+                background: rgba($secondary-color, 0.3);
+                border-color: $secondary-color;
+                transform: rotate(90deg) scale(1.1);
+            
+        
+    
+
+    .sidebar-nav 
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        overflow-y: auto;
+        padding-right: 5px;
+
+        &::-webkit-scrollbar 
+            width: 3px;
+        
+
+        &::-webkit-scrollbar-track 
+            background: rgba($white, 0.05);
+            border-radius: 3px;
+        
+
+        &::-webkit-scrollbar-thumb 
+            background: rgba($secondary-color, 0.4);
+            border-radius: 3px;
+
+            &:hover 
+                background: rgba($secondary-color, 0.6);
+            
+        
+
+        a 
+            color: $white;
+            text-decoration: none;
+            padding: 12px 16px;
+            border-radius: 10px;
+            transition: $transition;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            font-size: 1rem;
+            border: 1px solid transparent;
+            background: rgba($white, 0.05);
+
+            i 
+                font-size: 1.1rem;
+                width: 22px;
+                text-align: center;
+                opacity: 0.8;
+            
+
+            &:hover 
+                background: rgba($white, 0.15);
+                transform: translateX(5px);
+                border-color: rgba($secondary-color, 0.3);
+                box-shadow: 0 0 20px rgba($secondary-color, 0.1);
+            
+
+            &.active 
+                background: rgba($secondary-color, 0.2);
+                border-color: $secondary-color;
+                color: $secondary-color;
+                font-weight: 600;
+                box-shadow: 0 0 30px rgba($secondary-color, 0.1);
+
+                i 
+                    opacity: 1;
+                
+            
+        
+    
+
+    .sidebar-footer 
+        padding-top: 20px;
+        border-top: 2px solid rgba($white, 0.1);
+        margin-top: 10px;
+
+        .sidebar-whatsapp 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #25d366, #128C7E);
+            background-size: 200% 200%;
+            animation: gradientShift 6s ease infinite;
+            color: $white;
+            padding: 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: $transition;
+            border: 1px solid rgba($white, 0.1);
+
+            i 
+                font-size: 1.3rem;
+            
+
+            &:hover 
+                transform: scale(1.02);
+                box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+                border-color: rgba($white, 0.3);
+            
+        
+    
+
+
+// ============================================================
+// 11. RESPONSIVE DESIGN
+// ============================================================
+
+// Tablet & Small Desktop
+@media (max-width: 1024px) 
+    header.navbar .container 
+        gap: 15px;
+    
+
+    .nav-menu 
+        gap: 5px;
+
+        a 
+            padding: 6px 10px;
+            font-size: 13px;
+        
+    
+
+    .whatsapp-btn 
+        padding: 8px 16px;
+        font-size: 13px;
+
+        i 
+            font-size: 16px;
+        
+    
+
+
+// Mobile & Tablet - Show Hamburger, Hide Desktop Menu
+@media (max-width: 768px) 
+    header.navbar .container 
+        gap: 12px;
+    
+
+    // Hide desktop menu
+    .nav-menu 
+        display: none !important;
+    
+
+    // Show hamburger
+    .hamburger 
+        display: flex !important;
+    
+
+    .logo img 
+        height: 40px;
+    
+
+    .whatsapp-btn 
+        padding: 8px 14px;
+        font-size: 12px;
+
+        i 
+            font-size: 14px;
+        
+
+        span 
+            display: none; // Hide text on mobile
+        
+    
+
+    // Sidebar overlay active
+    .sidebar-overlay.active 
+        display: block;
+    
+
+
+// Small Mobile
+@media (max-width: 480px) 
+    .logo img 
+        height: 35px;
+    
+
+    .whatsapp-btn 
+        padding: 8px;
+        border-radius: 50%;
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #25d366;
+
+        i 
+            font-size: 16px;
+            margin: 0;
+        
+
+        span 
+            display: none;
+        
+    
+
+    .hamburger 
+        padding: 8px;
+
+        span 
+            width: 20px;
+            height: 2.5px;
+        
+    
+
+    .sidebar 
+        width: 280px;
+        padding: 15px;
+
+        .sidebar-nav a 
+            padding: 10px 14px;
+            font-size: 0.9rem;
+
+            i 
+                font-size: 1rem;
+                width: 20px;
+            
+        
+
+        .sidebar-header 
+            .sidebar-logo 
+                height: 38px;
+            
+
+            .sidebar-close 
+                width: 35px;
+                height: 35px;
+                font-size: 1.3rem;
+            
+        
+    

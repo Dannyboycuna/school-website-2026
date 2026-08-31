@@ -1,0 +1,81 @@
+<header class="navbar">
+  <div class="container">
+      <div class="logo">
+          <a routerLink="/"><img src="assets/images/logo.png" alt="School logo"></a>
+      </div>
+      
+      <!-- Desktop Navigation -->
+      <nav class="nav-menu">
+          <a routerLink="/about" routerLinkActive="active">About</a>
+          <a routerLink="/curricula" routerLinkActive="active">Curricula</a>
+          <a routerLink="/admissions" routerLinkActive="active">Admissions</a>
+          <a routerLink="/fees" routerLinkActive="active">Fees</a>
+          <a routerLink="/contact" routerLinkActive="active">Contact</a>
+          <a routerLink="/news" routerLinkActive="active">News</a>
+          <a routerLink="/gallery" routerLinkActive="active">Gallery</a>
+          <a routerLink="/testimonial" routerLinkActive="active">Testimonial</a>
+          <a routerLink="/extralesson" routerLinkActive="active">Extra Lessons</a>
+      </nav>
+      
+      <!-- Right Side Actions -->
+      <div class="nav-actions">
+          <a href="https://wa.me/258876325698?text=Hi,%20Colegio%20Estrela%20Do%20Indico%2C%20I%27m%20interested%20in%20your%20services." class="whatsapp-btn">
+              <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+          </a>
+          
+          <!-- Hamburger Menu (Mobile/Tablet) -->
+          <button class="hamburger" (click)="toggleMenu()" [class.active]="isMenuOpen">
+              <span></span>
+              <span></span>
+              <span></span>
+          </button>
+      </div>
+  </div>
+</header>
+
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" [class.active]="isMenuOpen" (click)="closeMenu()"></div>
+
+<!-- Sidebar (Mobile/Tablet) -->
+<aside class="sidebar" [class.active]="isMenuOpen">
+  <div class="sidebar-header">
+      <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+      <button class="sidebar-close" (click)="closeMenu()">✕</button>
+  </div>
+
+  <nav class="sidebar-nav">
+      <a routerLink="/about" routerLinkActive="active" (click)="closeMenu()">
+          <i class="fas fa-info-circle"></i> About
+      </a>
+      <a routerLink="/curricula" routerLinkActive="active" (click)="closeMenu()">
+          <i class="fas fa-book"></i> Curricula
+      </a>
+      <a routerLink="/admissions" routerLinkActive="active" (click)="closeMenu()">
+          <i class="fas fa-user-graduate"></i> Admissions
+      </a>
+      <a routerLink="/fees" routerLinkActive="active" (click)="closeMenu()">
+          <i class="fas fa-money-bill-wave"></i> Fees
+      </a>
+      <a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">
+          <i class="fas fa-envelope"></i> Contact
+      </a>
+      <a routerLink="/news" routerLinkActive="active" (click)="closeMenu()">
+          <i class="fas fa-newspaper"></i> News
+      </a>
+      <a routerLink="/gallery" routerLinkActive="active" (click)="closeMenu()">
+          <i class="fas fa-images"></i> Gallery
+      </a>
+      <a routerLink="/testimonial" routerLinkActive="active" (click)="closeMenu()">
+          <i class="fas fa-comment"></i> Testimonial
+      </a>
+      <a routerLink="/extralesson" routerLinkActive="active" (click)="closeMenu()">
+          <i class="fas fa-running"></i> Extra Lessons
+      </a>
+  </nav>
+
+  <div class="sidebar-footer">
+      <a href="https://wa.me/258876325698?text=Hi,%20Colegio%20Estrela%20Do%20Indico%2C%20I%27m%20interested%20in%20your%20services." target="_blank" class="sidebar-whatsapp">
+          <i class="fab fa-whatsapp"></i> Contact on WhatsApp
+      </a>
+  </div>
+</aside>

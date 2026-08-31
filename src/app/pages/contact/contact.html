@@ -1,0 +1,161 @@
+<section class="page-section">
+    <div class="container">
+      <h1>Contact Us</h1>
+      
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2>Get In Touch</h2>
+          
+          <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h3>Address</h3>
+              <p>Matola, Maputo Province, Mozambique</p>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <h3>Phone</h3>
+              <p>+258 87 632 5698</p>
+              <p>+258 87 997 1847</p>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h3>Email</h3>
+              <p>info@estreladoindico.edu.mz</p>
+              <p>admissions@estreladoindico.edu.mz</p>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <i class="fab fa-whatsapp"></i>
+            <div>
+              <h3>WhatsApp</h3>
+              <a href="https://wa.me/258876325698?text=Hi,%20Colegio%20Estrela%20Do%20Indico%2C%20I%27m%20interested%20in%20your%20services." target="_blank" class="btn btn-primary">
+                Chat with us
+              </a>
+            </div>
+          </div>
+          
+          <div class="social-icons">
+            <a href="https://web.facebook.com/profile.php?id=61582036528493" target="_blank" title="Facebook">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" title="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" title="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="contact-form">
+          <h2>Send us a Message</h2>
+          <div class="contact-form">
+            <h2>Send us a Message</h2>
+            <p class="form-subtitle">We'll respond to you via WhatsApp</p>
+          
+            <!-- Success Message -->
+            <div *ngIf="showSuccess" class="success-message">
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <h4>WhatsApp Opening!</h4>
+                <p>Your message has been prepared. Click send in WhatsApp to complete.</p>
+              </div>
+              <button (click)="closeSuccess()" class="close-btn">×</button>
+            </div>
+          
+            <!-- Error Message -->
+            <div *ngIf="errorMessage" class="error-message">
+              <i class="fas fa-exclamation-circle"></i>
+              <span>{{ errorMessage }}</span>
+            </div>
+          
+            <form (ngSubmit)="sendToWhatsApp()" #contactForm="ngForm">
+              <div class="form-group">
+                <label for="name">
+                  <i class="fas fa-user"></i> Full Name
+                </label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  [(ngModel)]="contactData.name"
+                  name="name"
+                  placeholder="Your name" 
+                  required>
+              </div>
+              
+              <div class="form-group">
+                <label for="email">
+                  <i class="fas fa-envelope"></i> Email
+                </label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  [(ngModel)]="contactData.email"
+                  name="email"
+                  placeholder="your@email.com" 
+                  required>
+              </div>
+              
+              <div class="form-group">
+                <label for="subject">
+                  <i class="fas fa-tag"></i> Subject
+                </label>
+                <select 
+                  id="subject" 
+                  [(ngModel)]="contactData.subject"
+                  name="subject"
+                  required>
+                  <option value="">How can we help?</option>
+                  <option value="Admissions & Enrollment">Admissions & Enrollment</option>
+                  <option value="School Fees">School Fees</option>
+                  <option value="Academic Programs">Academic Programs</option>
+                  <option value="Extracurricular Activities">Extracurricular Activities</option>
+                  <option value="Parent-Teacher Meeting">Parent-Teacher Meeting</option>
+                  <option value="General Inquiry">General Inquiry</option>
+                  <option value="Complaint">Complaint</option>
+                  <option value="Suggestion">Suggestion</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="message">
+                  <i class="fas fa-comment"></i> Message
+                </label>
+                <textarea 
+                  id="message" 
+                  [(ngModel)]="contactData.message"
+                  name="message"
+                  placeholder="Your message..." 
+                  rows="5" 
+                  required></textarea>
+              </div>
+              
+              <button 
+                type="submit" 
+                class="btn btn-primary"
+                [disabled]="isSubmitting">
+                <i class="fab fa-whatsapp"></i>
+                <span *ngIf="!isSubmitting">Send Message via WhatsApp</span>
+                <span *ngIf="isSubmitting">
+                  <i class="fas fa-spinner fa-spin"></i> Opening WhatsApp...
+                </span>
+              </button>
+          
+              <p class="form-note">
+                <i class="fas fa-info-circle"></i>
+                By clicking send, WhatsApp will open with your message pre-filled.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

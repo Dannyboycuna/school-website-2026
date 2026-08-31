@@ -1,0 +1,154 @@
+
+
+<!-- HERO SECTION (Big Banner) -->
+<section class="hero">
+    
+    <!-- VIDEO BACKGROUND (autoplay, muted, loop, playsinline) -->
+    <video 
+      autoplay 
+      muted 
+      loop 
+      playsinline 
+      id="bg-video" 
+      poster="https://placehold.co/1200x600/1a5f7a/white?text=video+background"
+    >
+      
+      <source src="assets/videos/chris_background.mp4" type="video/mp4">
+      <!-- fallback message (shown if video not supported) -->
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- HERO CONTENT (overlaid) -->
+    <div class="hero-content">
+      <h1>Welcome to Colegio Estrela do Indico</h1>
+      <h2>Excellence in Education — National and Cambridge Curricula</h2>
+      <div class="buttons">
+        <a routerLink="/contact" class="btn btn-primary">Enroll Now</a>
+        <a routerLink="/curricula" class="btn btn-secondary">Learn More</a>
+      </div>
+      <!-- subtle extra note – matches the "Stunning Video Background" style -->
+      <p style="margin-top: 2.2rem; font-size: 0.9rem; opacity: 0.8; letter-spacing: 0.5px;">
+        ⚡ Estrela do Indico in Video
+      </p>
+    </div>
+
+  </section>
+
+
+
+
+
+<!-- STATS SECTION -->
+<section class="stats">
+    <div class="container">
+        <div class="stat-card">
+            <h3>500+</h3>
+            <p>Students</p>
+        </div>
+        <div class="stat-card">
+            <h3>50+</h3>
+            <p>Staff Members</p>
+        </div>
+        <div class="stat-card">
+            <h3>2</h3>
+            <p>Curricula</p>
+        </div>
+        <div class="stat-card">
+            <h3>100+</h3>
+            <p>Awards</p>
+        </div>
+    </div>
+</section>
+
+<!-- CURRICULA SECTION -->
+<section class="curricula">
+    <div class="container">
+        <h2>Our Curricula</h2>
+
+        <div class="curriculum-grid">
+            <!-- Cambridge Card -->
+            <div class="curriculum-card">
+                <h3>Cambridge Curriculum</h3>
+                <p class="subtitle">International Standard Education</p>
+                <p class="grades">Grades: 1-6</p>
+                <button class="btn-learn" (click)="openModal('cambridge')">Learn More</button>
+            </div>
+
+            <!-- National Card -->
+            <div class="curriculum-card">
+                <h3>National Curriculum</h3>
+                <p class="subtitle">Mozambique Standard Education</p>
+                <p class="grades">Grades: 1-6</p>
+                <button class="btn-learn" (click)="openModal('national')">Learn More</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MODAL: CAMBRIDGE ===== -->
+<div class="modal-overlay" [class.active]="activeModal === 'cambridge'" (click)="closeModalOnOverlay($event)">
+    <div class="modal">
+        <button class="close-btn" (click)="closeModal()">✕</button>
+        <div class="icon">🇬🇧</div>
+        <h2>Cambridge Curriculum</h2>
+        <span class="badge">International Standard</span>
+        <p class="description">
+            Globally recognized education pathway that develops critical thinking,
+            creativity, and independent learning skills.
+        </p>
+        <ul class="detail-list">
+            <li>Grades 1–6</li>
+            <li>English medium instruction</li>
+            <li>International assessments &amp; progression</li>
+            <li>Focus on inquiry-based learning</li>
+            <li>Preparation for Cambridge Checkpoint</li>
+        </ul>
+        <button class="btn-primary" (click)="closeModal()">Close</button>
+    </div>
+</div>
+
+<!-- ===== MODAL: NATIONAL ===== -->
+<div class="modal-overlay" [class.active]="activeModal === 'national'" (click)="closeModalOnOverlay($event)">
+    <div class="modal">
+        <button class="close-btn" (click)="closeModal()">✕</button>
+        <div class="icon">🇲🇿</div>
+        <h2>National Curriculum</h2>
+        <span class="badge">Mozambique Standard</span>
+        <p class="description">
+            Designed to meet Mozambique's educational goals, promoting local culture,
+            national values, and academic excellence.
+        </p>
+        <ul class="detail-list">
+            <li>Grades 1–6</li>
+            <li>Portuguese medium instruction</li>
+            <li>Aligned with Mozambique's education system</li>
+            <li>Emphasis on local history &amp; culture</li>
+            <li>Preparation for national examinations</li>
+        </ul>
+        <button class="btn-primary" (click)="closeModal()">Close</button>
+    </div>
+    
+
+<!-- !-- FEATURED NEWS -->
+<section class="news">
+    <div class="container">
+        <h2>Latest News</h2>
+        <div class="news-cards">
+            <div class="news-card">
+                <h4>Science Fair 2026</h4>
+                <p>Students showcase amazing projects!</p>
+                <small>March 15, 2026</small>
+            </div>
+            <div class="news-card">
+                <h4>Sports Day</h4>
+                <p>Family sports event - All welcome!</p>
+                <small>March 22, 2026</small>
+            </div>
+            <div class="news-card">
+                <h4>New Lab Opened</h4>
+                <p>State-of-the-art science lab ready!</p>
+                <small>March 10, 2026</small>
+            </div>
+        </div>
+    </div>
+</section>

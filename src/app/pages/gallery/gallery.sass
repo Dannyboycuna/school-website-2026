@@ -1,0 +1,109 @@
+.page-section  
+  padding: 60px 20px;
+  min-height: 80vh;
+  background-color: #f9f9f9;
+ 
+
+.container  
+  max-width: 1200px;
+  margin: 0 auto;
+ 
+
+h1  
+  text-align: center;
+  color: #1a5f7a;
+  font-size: 36px;
+  margin-bottom: 40px;
+ 
+
+.filter-buttons  
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+ 
+
+.filter-btn  
+  padding: 10px 20px;
+  border: 2px solid #1a5f7a;
+  background-color: white;
+  color: #1a5f7a;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+ 
+
+.filter-btn:hover,
+.filter-btn.active  
+  background-color: #1a5f7a;
+  color: white;
+ 
+
+.gallery-grid  
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+ 
+
+.gallery-item  
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  aspect-ratio: 1;
+  cursor: pointer;
+ 
+
+.gallery-image  
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+ 
+
+.gallery-item:hover .gallery-image  
+  transform: scale(1.1);
+ 
+
+.gallery-overlay  
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(26, 95, 122, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  opacity: 0;
+  transition: 0.3s;
+ 
+
+.gallery-item:hover .gallery-overlay  
+  opacity: 1;
+ 
+
+.gallery-overlay h3  
+  font-size: 18px;
+  margin-bottom: 5px;
+ 
+
+.gallery-overlay p  
+  font-size: 12px;
+  color: #ffc107;
+ 
+
+@media (max-width: 768px)  
+  .gallery-grid  
+    grid-template-columns: repeat(2, 1fr);
+   
+  
+  h1  
+    font-size: 28px;
+   
+ 

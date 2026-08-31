@@ -1,0 +1,256 @@
+<!-- ===== EXTRA LESSONS SECTION ===== -->
+<section class="extra-lessons">
+    <div class="container">
+        <div class="section-header">
+            <h2>Extra Lessons</h2>
+            <p class="subtitle">Discover our diverse extracurricular activities</p>
+        </div>
+
+        <div class="lessons-grid">
+            <!-- Taekwondo Card -->
+            <div class="lesson-card" (click)="openModal('taekwondo')">
+                <div class="lesson-image">
+                    <img src="https://images.unsplash.com/photo-1555597673-b21d5c935865?w=400&h=300&fit=crop" alt="Taekwondo">
+                    <div class="lesson-overlay">
+                        <span class="view-details">View Details</span>
+                    </div>
+                </div>
+                <div class="lesson-content">
+                    <div class="lesson-icon">🥋</div>
+                    <h3>Taekwondo</h3>
+                    <p class="lesson-description">Martial arts training for discipline and self-defense</p>
+                    <div class="lesson-meta">
+                        <span><i class="icon">⏰</i> Mon & Tuesday</span>
+                        <span><i class="icon">👤</i> Ages: All ages </span>
+                    </div>
+                    <button class="btn-learn" (click)="$event.stopPropagation(); openModal('taekwondo')">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chess Card -->
+            <div class="lesson-card" (click)="openModal('chess')">
+                <div class="lesson-image">
+                    <img src="https://images.unsplash.com/photo-1586165368502-1bad197a6461?w=400&h=300&fit=crop" alt="Chess">
+                    <div class="lesson-overlay">
+                        <span class="view-details">View Details</span>
+                    </div>
+                </div>
+                <div class="lesson-content">
+                    <div class="lesson-icon">♟️</div>
+                    <h3>Chess</h3>
+                    <p class="lesson-description">Strategic thinking and problem-solving through chess</p>
+                    <div class="lesson-meta">
+                        <span><i class="icon">⏰</i> Monday & Tuesday</span>
+                        <span><i class="icon">👤</i> Ages: 8-17</span>
+                    </div>
+                    <button class="btn-learn" (click)="$event.stopPropagation(); openModal('chess')">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+
+            <!-- Physical Education Card -->
+            <div class="lesson-card" (click)="openModal('physical-education')">
+                <div class="lesson-image">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop" alt="Physical Education">
+                    <div class="lesson-overlay">
+                        <span class="view-details">View Details</span>
+                    </div>
+                </div>
+                <div class="lesson-content">
+                    <div class="lesson-icon">🏃</div>
+                    <h3>Physical Education</h3>
+                    <p class="lesson-description">Sports, fitness, and teamwork activities</p>
+                    <div class="lesson-meta">
+                        <span><i class="icon">⏰</i> Wednesday - Thursday</span>
+                        <span><i class="icon">👤</i> All ages</span>
+                    </div>
+                    <button class="btn-learn" (click)="$event.stopPropagation(); openModal('physical-education')">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dance Card -->
+            <div class="lesson-card" (click)="openModal('dance')">
+                <div class="lesson-image">
+                    <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=300&fit=crop" alt="Dance">
+                    <div class="lesson-overlay">
+                        <span class="view-details">View Details</span>
+                    </div>
+                </div>
+                <div class="lesson-content">
+                    <div class="lesson-icon">💃</div>
+                    <h3>Dance</h3>
+                    <p class="lesson-description">Express yourself through various dance styles</p>
+                    <div class="lesson-meta">
+                        <span><i class="icon">⏰</i> Wednesday & Thursday</span>
+                        <span><i class="icon">👤</i> Ages 5-16</span>
+                    </div>
+                    <button class="btn-learn" (click)="$event.stopPropagation(); openModal('dance')">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MODALS ===== -->
+
+<!-- TAEKWONDO MODAL -->
+<div class="modal-overlay" [class.active]="activeModal === 'taekwondo'" (click)="closeModalOnOverlay($event)">
+    <div class="modal">
+        <button class="close-btn" (click)="closeModal()">✕</button>
+        <div class="modal-image">
+            <img src="https://images.unsplash.com/photo-1555597673-b21d5c935865?w=600&h=400&fit=crop" alt="Taekwondo">
+        </div>
+        <div class="modal-content">
+            <div class="modal-icon">🥋</div>
+            <h2>Taekwondo</h2>
+            <span class="badge">Martial Arts</span>
+            <p class="description">
+                Taekwondo is a Korean martial art that focuses on head-height kicks, jumping and spinning kicks, 
+                and fast kicking techniques. Our program develops discipline, confidence, and physical fitness.
+            </p>
+            <div class="modal-details">
+                <div class="detail-item">
+                    <span class="label">Schedule:</span>
+                    <span>Monday & Tuesday, 12:00 PM - 1:00 PM</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Age Group:</span>
+                    <span>All ages</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Instructor:</span>
+                    <span>Master Mr. DEIXA, Lazaro Manuel Coach and Instructor</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Benefits:</span>
+                    <span>Self-defense, discipline, fitness, confidence</span>
+                </div>
+            </div>
+            <button class="btn-primary" (click)="closeModal()">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- CHESS MODAL -->
+<div class="modal-overlay" [class.active]="activeModal === 'chess'" (click)="closeModalOnOverlay($event)">
+    <div class="modal">
+        <button class="close-btn" (click)="closeModal()">✕</button>
+        <div class="modal-image">
+            <img src="https://images.unsplash.com/photo-1586165368502-1bad197a6461?w=600&h=400&fit=crop" alt="Chess">
+        </div>
+        <div class="modal-content">
+            <div class="modal-icon">♟️</div>
+            <h2>Chess</h2>
+            <span class="badge">Strategy & Logic</span>
+            <p class="description">
+                Chess develops critical thinking, strategic planning, and problem-solving skills. 
+                Our program caters to beginners and advanced players, with opportunities to compete 
+                in inter-school tournaments.
+            </p>
+            <div class="modal-details">
+                <div class="detail-item">
+                    <span class="label">Schedule:</span>
+                    <span>Monday & Tuesday, 1:40 PM - 2:30 PM</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Age Group:</span>
+                    <span>All Ages</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Instructor:</span>
+                    <span>Mr. DEIXA, Lazaro Manuel Coach</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Benefits:</span>
+                    <span>Strategic thinking, concentration, memory</span>
+                </div>
+            </div>
+            <button class="btn-primary" (click)="closeModal()">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- PHYSICAL EDUCATION MODAL -->
+<div class="modal-overlay" [class.active]="activeModal === 'physical-education'" (click)="closeModalOnOverlay($event)">
+    <div class="modal">
+        <button class="close-btn" (click)="closeModal()">✕</button>
+        <div class="modal-image">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop" alt="Physical Education">
+        </div>
+        <div class="modal-content">
+            <div class="modal-icon">🏃</div>
+            <h2>Physical Education</h2>
+            <span class="badge">Sports & Fitness</span>
+            <p class="description">
+                Physical Education promotes healthy living through sports, games, and fitness activities. 
+                Students develop teamwork, sportsmanship, and physical skills through various activities 
+                including football, basketball, athletics, and more.
+            </p>
+            <div class="modal-details">
+                <div class="detail-item">
+                    <span class="label">Schedule:</span>
+                    <span>Wednesday - Thursday, 12:00 PM - 1:00 PM</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Age Group:</span>
+                    <span>All ages (divided by level)</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Instructor:</span>
+                    <span>Coach Mr. DEIXA, Lazaro Manuel, Certified PE Teacher</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Benefits:</span>
+                    <span>Fitness, teamwork, coordination, health</span>
+                </div>
+            </div>
+            <button class="btn-primary" (click)="closeModal()">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- DANCE MODAL -->
+<div class="modal-overlay" [class.active]="activeModal === 'dance'" (click)="closeModalOnOverlay($event)">
+    <div class="modal">
+        <button class="close-btn" (click)="closeModal()">✕</button>
+        <div class="modal-image">
+            <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=600&h=400&fit=crop" alt="Dance">
+        </div>
+        <div class="modal-content">
+            <div class="modal-icon">💃</div>
+            <h2>Dance</h2>
+            <span class="badge">Creative Expression</span>
+            <p class="description">
+                Dance classes offer students the opportunity to express themselves through movement. 
+                We teach various styles including contemporary, hip-hop, traditional African dance, 
+                and ballet, helping students develop rhythm, coordination, and creativity.
+            </p>
+            <div class="modal-details">
+                <div class="detail-item">
+                    <span class="label">Schedule:</span>
+                    <span>Wednesday & Thursday, 3:00 PM - 4:30 PM</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Age Group:</span>
+                    <span>5 - 16 years</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Instructor:</span>
+                    <span>Ms. Maria, Professional Dancer</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Benefits:</span>
+                    <span>Creativity, fitness, coordination, confidence</span>
+                </div>
+            </div>
+            <button class="btn-primary" (click)="closeModal()">Close</button>
+        </div>
+    </div>
+</div>

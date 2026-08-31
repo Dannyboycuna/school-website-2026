@@ -1,0 +1,254 @@
+<section class="admin-section">
+    <div class="container">
+      <h1>Admin Dashboard</h1>
+      <p class="subtitle">Manage your school content - News, Gallery & Testimonials</p>
+  
+      <!-- TABS -->
+      <div class="admin-tabs">
+        <button 
+          *ngFor="let tab of tabs" 
+          (click)="setActiveTab(tab)"
+          [class.active]="activeTab === tab"
+          class="tab-btn">
+          <i [ngClass]="getTabIcon(tab)"></i> {{ tab }}
+        </button>
+      </div>
+  
+      <!-- NEWS MANAGEMENT -->
+      <div *ngIf="activeTab === 'News'" class="tab-content">
+        <h2>Manage News & Updates</h2>
+  
+        <!-- Add News Form -->
+        <div class="form-section">
+          <h3>Add New Article</h3>
+          <form (ngSubmit)="addNews()" class="admin-form">
+            <input 
+              [(ngModel)]="newNews.title" 
+              name="title"
+              type="text" 
+              placeholder="Article Title" 
+              required>
+            
+            <textarea 
+              [(ngModel)]="newNews.description" 
+              name="description"
+              placeholder="Article Description" 
+              rows="4" 
+              required></textarea>
+            
+            <input 
+              [(ngModel)]="newNews.date" 
+              name="date"
+              type="date" 
+              placeholder="Date (e.g., March 15, 2026)" 
+              required>
+            
+            <!-- REPLACE image URL input with file upload -->
+            <div class="file-upload-wrapper">
+              <label for="newsImage" class="file-upload-label">
+                <i class="fas fa-upload"></i> Choose Image
+              </label>
+              <input 
+                type="file" 
+                id="newsImage"
+                (change)="onNewsFileSelected($event)"
+                accept="image/*"
+                required>
+              <span *ngIf="newNewsFile" class="file-name">{{ newNewsFile.name }}</span>
+            </div>
+  
+            <!-- Show image preview -->
+            <div *ngIf="newNews.image" class="image-preview">
+              <img [src]="newNews.image" alt="Preview" class="preview-thumbnail">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-plus"></i> Add News
+            </button>
+          </form>
+        </div>
+  
+        <!-- News List -->
+        <div class="content-list">
+          <h3>Existing News ({{ newsList.length }})</h3>
+          
+          <div *ngIf="newsList.length === 0" class="empty-state">
+            <p>No news yet. Add your first article!</p>
+          </div>
+  
+          <div *ngFor="let item of newsList" class="list-item">
+            <div class="item-image">
+              <img [src]="item.image" [alt]="item.title">
+            </div>
+            
+            <div class="item-content">
+              <h4>{{ item.title }}</h4>
+              <p>{{ item.description }}</p>
+              <small><i class="fas fa-calendar"></i> {{ item.date }}</small>
+            </div>
+  
+            <div class="item-actions">
+              <button (click)="deleteNews(item.id)" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- GALLERY MANAGEMENT -->
+      <div *ngIf="activeTab === 'Gallery'" class="tab-content">
+        <h2>Manage Photo Gallery</h2>
+  
+        <!-- Add Gallery Form -->
+        <div class="form-section">
+          <h3>Add New Photo</h3>
+          <form (ngSubmit)="addGalleryImage()" class="admin-form">
+            <input 
+              [(ngModel)]="newGallery.title" 
+              name="title"
+              type="text" 
+              placeholder="Photo Title" 
+              required>
+            
+            <select 
+              [(ngModel)]="newGallery.category" 
+              name="category"
+              required>
+              <option value="">Select Category</option>
+              <option value="Academics">Academics</option>
+              <option value="Sports">Sports</option>
+              <option value="Arts">Arts</option>
+              <option value="Facilities">Facilities</option>
+              <option value="Events">Events</option>
+              <option value="Activities">Activities</option>
+            </select>
+            
+            <!-- REPLACE image URL input with file upload -->
+            <div class="file-upload-wrapper">
+              <label for="galleryImage" class="file-upload-label">
+                <i class="fas fa-upload"></i> Choose Image
+              </label>
+              <input 
+                type="file" 
+                id="galleryImage"
+                (change)="onGalleryFileSelected($event)"
+                accept="image/*"
+                required>
+              <span *ngIf="newGalleryFile" class="file-name">{{ newGalleryFile.name }}</span>
+            </div>
+  
+            <!-- Show image preview -->
+            <div *ngIf="newGallery.image" class="image-preview">
+              <img [src]="newGallery.image" alt="Preview" class="preview-thumbnail">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-image"></i> Add Photo
+            </button>
+          </form>
+        </div>
+  
+        <!-- Gallery List -->
+        <div class="content-list">
+          <h3>Gallery Photos ({{ galleryList.length }})</h3>
+          
+          <div *ngIf="galleryList.length === 0" class="empty-state">
+            <p>No photos yet. Add your first photo!</p>
+          </div>
+  
+          <div class="gallery-admin-grid">
+            <div *ngFor="let image of galleryList" class="gallery-admin-item">
+              <img [src]="image.image" [alt]="image.title">
+              <div class="gallery-admin-info">
+                <h4>{{ image.title }}</h4>
+                <p class="category">{{ image.category }}</p>
+              </div>
+              <button (click)="deleteGalleryImage(image.id)" class="btn btn-danger btn-sm">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- TESTIMONIALS MANAGEMENT -->
+      <div *ngIf="activeTab === 'Testimonials'" class="tab-content">
+        <h2>Manage Testimonials</h2>
+  
+        <!-- Add Testimonial Form -->
+        <div class="form-section">
+          <h3>Add New Testimonial</h3>
+          <form (ngSubmit)="addTestimonial()" class="admin-form">
+            <input 
+              [(ngModel)]="newTestimonial.name" 
+              name="name"
+              type="text" 
+              placeholder="Parent Name" 
+              required>
+            
+            <input 
+              [(ngModel)]="newTestimonial.role" 
+              name="role"
+              type="text" 
+              placeholder="Role (e.g., Parent - Grade 3)" 
+              required>
+            
+            <textarea 
+              [(ngModel)]="newTestimonial.text" 
+              name="text"
+              placeholder="Testimonial Message" 
+              rows="4" 
+              required></textarea>
+            
+            <!-- REPLACE image URL input with file upload -->
+            <div class="file-upload-wrapper">
+              <label for="testimonialImage" class="file-upload-label">
+                <i class="fas fa-upload"></i> Choose Profile Image
+              </label>
+              <input 
+                type="file" 
+                id="testimonialImage"
+                (change)="onTestimonialFileSelected($event)"
+                accept="image/*"
+                required>
+              <span *ngIf="newTestimonialFile" class="file-name">{{ newTestimonialFile.name }}</span>
+            </div>
+  
+            <!-- Show image preview -->
+            <div *ngIf="newTestimonial.image" class="image-preview">
+              <img [src]="newTestimonial.image" alt="Preview" class="preview-thumbnail">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-star"></i> Add Testimonial
+            </button>
+          </form>
+        </div>
+  
+        <!-- Testimonials List -->
+        <div class="content-list">
+          <h3>Existing Testimonials ({{ testimonialsList.length }})</h3>
+          
+          <div *ngIf="testimonialsList.length === 0" class="empty-state">
+            <p>No testimonials yet. Add your first one!</p>
+          </div>
+  
+          <div *ngFor="let testimonial of testimonialsList" class="testimonial-admin-item">
+            <img [src]="testimonial.image" [alt]="testimonial.name" class="profile-img">
+            
+            <div class="testimonial-content">
+              <h4>{{ testimonial.name }}</h4>
+              <p class="role">{{ testimonial.role }}</p>
+              <p class="text">"{{ testimonial.text }}"</p>
+            </div>
+  
+            <button (click)="deleteTestimonial(testimonial.id)" class="btn btn-danger btn-sm">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </section>

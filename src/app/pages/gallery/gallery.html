@@ -1,0 +1,24 @@
+<section class="page-section">
+    <div class="container">
+      <h1>School Gallery</h1>
+      
+      <div class="filter-buttons">
+        <button *ngFor="let category of categories" 
+                (click)="filterByCategory(category)"
+                [class.active]="selectedCategory === category"
+                class="filter-btn">
+          {{ category }}
+        </button>
+      </div>
+      
+      <div class="gallery-grid">
+        <div *ngFor="let image of filteredImages" class="gallery-item">
+          <img [src]="image.image" [alt]="image.title" class="gallery-image">
+          <div class="gallery-overlay">
+            <h3>{{ image.title }}</h3>
+            <p>{{ image.category }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

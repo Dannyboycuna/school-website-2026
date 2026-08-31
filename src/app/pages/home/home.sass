@@ -1,0 +1,654 @@
+// ============================================================
+// 1. VARIABLES & SETTINGS
+// ============================================================
+$primary-dark: #1a5f7a;
+$primary-light: #2a7fa9;
+$gradient-hero: linear-gradient(135deg, $primary-dark 0%, $primary-light 100%);
+$white: #ffffff;
+$light-bg: #f0f7fa;
+$text-dark: #1e2f3a;
+$text-muted: #4a6a7a;
+$shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.08);
+$shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.15);
+$radius-card: 1.8rem;
+$radius-btn: 60px;
+$font-base: 'Segoe UI', Roboto, system-ui, sans-serif;
+
+// ============================================================
+// 2. GLOBAL RESET / BASE
+// ============================================================
+* 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+
+body 
+  font-family: $font-base;
+  background: $light-bg;
+  color: $text-dark;
+  line-height: 1.6;
+
+
+.container 
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+
+
+// ============================================================
+// 3. HERO SECTION (video background + overlay)
+// ============================================================
+.hero 
+  position: relative;
+  width: 100%;
+  min-height: 540px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  background: $gradient-hero;               // fallback if video fails
+  opacity: 1
+  border-radius: 0 0 2.5rem 2.5rem;
+  overflow: hidden;                         // CRITICAL: keeps video contained
+  box-shadow: $shadow-lg;
+
+  // ---- video background ----
+  #bg-video 
+    position: absolute;                     // CRITICAL: positions video absolutely
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;                      // CRITICAL: covers entire hero
+    z-index: 1;                             // CRITICAL: places video behind content
+    background: $primary-dark;              // fallback color while loading
+    pointer-events: none;                   // prevents video from blocking clicks
+  
+
+  // ---- overlay gradient (extra depth) ----
+  &::after 
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;                             // CRITICAL: overlay goes above video
+    background: linear-gradient(135deg, rgba($primary-dark, 0.35) 0%, rgba($primary-light, 0.20) 100%);
+    pointer-events: none;                   // clicks pass through to buttons
+  
+
+  // ---- overlay content ----
+  .hero-content 
+    position: relative;                     // CRITICAL: content above video & overlay
+    z-index: 10;                            // CRITICAL: highest z-index
+    max-width: 780px;
+    color: white;
+    padding: 1.2rem;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    
+    // Optional: subtle glass effect
+    backdrop-filter: blur(2px);
+    border-radius: 2rem;
+    opacity: 0.7
+    
+
+    h1 
+      font-size: clamp(2.6rem, 10vw, 4.6rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      line-height: 1.15;
+    
+
+    h2 
+      font-size: clamp(1.2rem, 4vw, 2rem);
+      font-weight: 400;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+      letter-spacing: 0.3px;
+    
+
+    .buttons 
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem 1.8rem;
+      margin-top: 0.5rem;
+    
+
+    // small caption (extra)
+    p:last-of-type 
+      margin-top: 2.2rem;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      letter-spacing: 0.5px;
+    
+  
+
+
+// ---- buttons (reusable) ----
+.btn 
+  display: inline-block;
+  padding: 0.9rem 2.4rem;
+  border-radius: $radius-btn;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: 0.25s ease;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+  border: 2px solid transparent;
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+
+  &-primary 
+    background: $white;
+    color: $primary-dark;
+    border-color: $white;
+
+    &:hover 
+      background: rgba($white, 0.85);
+      transform: scale(1.04);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+    
+  
+
+  &-secondary 
+    background: rgba($white, 0.12);
+    color: $white;
+    border-color: rgba($white, 0.6);
+
+    &:hover 
+      background: rgba($white, 0.25);
+      border-color: $white;
+      transform: scale(1.04);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+    
+  
+
+  &-outline 
+    background: transparent;
+    color: $primary-dark;
+    border: 2px solid $primary-dark;
+    padding: 0.6rem 1.8rem;
+    font-weight: 600;
+
+    &:hover 
+      background: $primary-dark;
+      color: $white;
+      transform: translateY(-2px);
+      box-shadow: $shadow-sm;
+    
+  
+
+
+// ============================================================
+// 4. STATS SECTION
+// ============================================================
+.stats 
+  background: $white;
+  padding: 4rem 0 3.5rem;
+  margin: -1.5rem 0 0;                     // slight overlap with hero
+  position: relative;
+  z-index: 5;
+
+  .container 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    text-align: center;
+  
+
+  .stat-card 
+    background: $light-bg;
+    padding: 1.8rem 1rem;
+    border-radius: $radius-card;
+    box-shadow: $shadow-sm;
+    transition: 0.25s ease;
+
+    &:hover 
+      transform: translateY(-5px);
+      box-shadow: $shadow-lg;
+    
+
+    h3 
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: $primary-dark;
+      line-height: 1.1;
+      margin-bottom: 0.2rem;
+    
+
+    p 
+      font-size: 1.1rem;
+      color: $text-muted;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    
+  
+
+
+// ============================================================
+// 5. CURRICULA SECTION
+// ============================================================
+.curricula 
+  padding: 4.5rem 0;
+  background: $light-bg;
+
+  .container 
+    text-align: center;
+  
+
+  h2 
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: $primary-dark;
+    margin-bottom: 2.8rem;
+    letter-spacing: -0.02em;
+  
+
+  .curriculum-card 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-top: 0.5rem;
+
+    // each card (the inner ones)
+    > div 
+      background: $white;
+      padding: 2.2rem 1.8rem;
+      border-radius: $radius-card;
+      box-shadow: $shadow-sm;
+      transition: 0.3s ease;
+      border: 1px solid rgba($primary-dark, 0.08);
+
+      &:hover 
+        transform: translateY(-6px);
+        box-shadow: $shadow-lg;
+        border-color: rgba($primary-dark, 0.2);
+      
+
+      h3 
+        font-size: 1.6rem;
+        color: $primary-dark;
+        margin-bottom: 0.5rem;
+      
+
+      p 
+        color: $text-muted;
+        margin-bottom: 0.3rem;
+
+        &:last-of-type 
+          margin-bottom: 1.4rem;
+          font-weight: 500;
+          color: $primary-dark;
+        
+      
+
+      .btn-outline 
+        margin-top: 0.5rem;
+      
+    
+  
+
+
+// ============================================================
+// 6. NEWS SECTION
+// ============================================================
+.news 
+  padding: 4.5rem 0 5rem;
+  background: $white;
+
+  .container 
+    text-align: center;
+  
+
+  h2 
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: $primary-dark;
+    margin-bottom: 2.8rem;
+    letter-spacing: -0.02em;
+  
+
+  .news-cards 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  
+
+  .news-card 
+    background: $light-bg;
+    padding: 2rem 1.6rem;
+    border-radius: $radius-card;
+    text-align: left;
+    box-shadow: $shadow-sm;
+    transition: 0.25s ease;
+    border-left: 6px solid $primary-light;
+
+    &:hover 
+      transform: translateY(-4px);
+      box-shadow: $shadow-lg;
+    
+
+    h4 
+      font-size: 1.4rem;
+      color: $primary-dark;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    
+
+    p 
+      color: $text-muted;
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
+    
+
+    small 
+      color: lighten($text-muted, 15%);
+      font-size: 0.85rem;
+      display: block;
+      margin-top: 0.4rem;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    
+  
+
+
+// ============================================================
+// 7. RESPONSIVE FINE-TUNE
+// ============================================================
+@media (max-width: 640px) 
+  .hero 
+    min-height: 420px;
+    padding: 40px 16px;
+    border-radius: 0 0 1.8rem 1.8rem;
+
+    .hero-content 
+      h1  
+        font-size: 2.2rem; 
+      h2  
+        font-size: 1.1rem; 
+    
+  
+
+  .btn 
+    padding: 0.7rem 1.6rem;
+    font-size: 1rem;
+  
+
+  .stats .stat-card h3 
+    font-size: 2.2rem;
+  
+
+  .curricula h2,
+  .news h2 
+    font-size: 2.2rem;
+  
+
+  .curricula .curriculum-card > div 
+    padding: 1.6rem 1.2rem;
+  
+
+  // modal
+    // ============================================================
+// 1. VARIABLES
+// ============================================================
+$primary-dark: #1a5f7a;
+$primary-light: #2a7fa9;
+$white: #ffffff;
+$light-bg: #f0f7fa;
+$text-dark: #1e2f3a;
+$text-muted: #4a6a7a;
+$shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.08);
+$shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.15);
+$radius-card: 1.8rem;
+$radius-btn: 60px;
+
+// ============================================================
+// 2. CURRICULA SECTION
+// ============================================================
+.curricula 
+    padding: 4.5rem 0;
+    background: $light-bg;
+
+    .container 
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    
+
+    h2 
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: $primary-dark;
+        text-align: center;
+        margin-bottom: 2.8rem;
+        letter-spacing: -0.02em;
+    
+
+    .curriculum-grid 
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    
+
+    .curriculum-card 
+        background: $white;
+        padding: 2.5rem 2rem;
+        border-radius: $radius-card;
+        box-shadow: $shadow-sm;
+        text-align: center;
+        transition: 0.3s ease;
+        border: 1px solid rgba($primary-dark, 0.08);
+
+        &:hover 
+            transform: translateY(-6px);
+            box-shadow: $shadow-lg;
+            border-color: rgba($primary-dark, 0.2);
+        
+
+        h3 
+            font-size: 1.8rem;
+            color: $primary-dark;
+            margin-bottom: 0.5rem;
+        
+
+        .subtitle 
+            font-size: 1rem;
+            color: $text-muted;
+            margin-bottom: 0.3rem;
+        
+
+        .grades 
+            font-weight: 600;
+            color: $primary-dark;
+            margin: 0.5rem 0 1.5rem 0;
+            font-size: 1.1rem;
+        
+
+        .btn-learn 
+            background: transparent;
+            color: $primary-dark;
+            border: 2px solid $primary-dark;
+            padding: 0.7rem 2rem;
+            border-radius: $radius-btn;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.25s ease;
+
+            &:hover 
+                background: $primary-dark;
+                color: $white;
+                transform: translateY(-2px);
+                box-shadow: 0 8px 24px rgba($primary-dark, 0.25);
+            
+        
+    
+
+
+// ============================================================
+// 3. MODAL (POP-UP)
+// ============================================================
+.modal-overlay 
+    display: none; // hidden by default
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    animation: fadeIn 0.3s ease;
+
+    &.active 
+        display: flex;
+    
+
+    .modal 
+        background: $white;
+        max-width: 520px;
+        width: 100%;
+        padding: 2.5rem 2rem;
+        border-radius: 2rem;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        position: relative;
+        animation: slideUp 0.3s ease;
+        max-height: 90vh;
+        overflow-y: auto;
+
+        .close-btn 
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: $text-muted;
+            transition: 0.2s;
+            line-height: 1;
+
+            &:hover 
+                color: $primary-dark;
+                transform: rotate(90deg);
+            
+        
+
+        .icon 
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        
+
+        h2 
+            font-size: 2rem;
+            color: $primary-dark;
+            margin-bottom: 0.5rem;
+        
+
+        .badge 
+            display: inline-block;
+            background: $primary-dark;
+            color: $white;
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        
+
+        .description 
+            color: $text-muted;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin: 1rem 0;
+        
+
+        .detail-list 
+            text-align: left;
+            background: $light-bg;
+            padding: 1.2rem 1.8rem;
+            border-radius: 1rem;
+            margin: 1rem 0 1.5rem 0;
+
+            li 
+                list-style: none;
+                padding: 0.3rem 0;
+                color: $text-dark;
+
+                &::before 
+                    content: "✓ ";
+                    color: $primary-dark;
+                    font-weight: 700;
+                
+            
+        
+
+        .btn-primary 
+            background: $primary-dark;
+            color: $white;
+            border: none;
+            padding: 0.8rem 2.5rem;
+            border-radius: $radius-btn;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.25s ease;
+
+            &:hover 
+                background: darken($primary-dark, 10%);
+                transform: scale(1.04);
+                box-shadow: 0 10px 22px rgba($primary-dark, 0.3);
+            
+        
+    
+
+
+// ============================================================
+// 4. ANIMATIONS
+// ============================================================
+@keyframes fadeIn 
+    from 
+        opacity: 0;
+    
+    to 
+        opacity: 1;
+    
+
+
+@keyframes slideUp 
+    from 
+        transform: translateY(40px) scale(0.95);
+        opacity: 0;
+    
+    to 
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    
+
+
+// ============================================================
+// 5. RESPONSIVE
+// ============================================================
+@media (max-width: 640px) 
+    .curricula 
+        h2 
+            font-size: 2.2rem;
+        
+
+        .curriculum-grid 
+            grid-template-columns: 1fr;
+        
+    
+
+    .modal-overlay 
+        .modal 
+            padding: 2rem 1.5rem;
+
+            h2 
+                font-size: 1.6rem;
+            
+        
+    
