@@ -1,0 +1,17 @@
+{
+  "routes": {
+    "/school-website-2026": {},
+    "/school-website-2026/about": {},
+    "/school-website-2026/admin": {},
+    "/school-website-2026/admissions": {},
+    "/school-website-2026/contact": {},
+    "/school-website-2026/curricula": {},
+    "/school-website-2026/extralesson": {},
+    "/school-website-2026/fees": {},
+    "/school-website-2026/footer": {},
+    "/school-website-2026/gallery": {},
+    "/school-website-2026/navbar": {},
+    "/school-website-2026/news": {},
+    "/school-website-2026/testimonial": {}
+  }
+}

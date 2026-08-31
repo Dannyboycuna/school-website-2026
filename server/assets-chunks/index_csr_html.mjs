@@ -1,0 +1,14 @@
+export default `<!doctype html>
+<html lang="en" data-beasties-container="">
+<head>
+  <meta charset="utf-8">
+  <title>GetStarted</title>
+  <base href="/school-website-2026/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<style>:root{--fa-family-brands:"Font Awesome 7 Brands";--fa-font-brands:normal 400 1em/1 var(--fa-family-brands)}:root{--fa-font-regular:normal 400 1em/1 var(--fa-family-classic)}:root{--fa-family-classic:"Font Awesome 7 Free";--fa-font-solid:normal 900 1em/1 var(--fa-family-classic);--fa-style-family-classic:var(--fa-family-classic)}html,body{margin:0;padding:0;width:100%;min-height:100vh}body{background-image:url(/assets/images/logo.png);background-repeat:no-repeat;background-size:cover;background-position:center center;background-attachment:fixed}</style><link rel="stylesheet" href="styles-SBU7EONM.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-SBU7EONM.css"></noscript></head>
+<body ngcm="">
+  <app-root></app-root>
+<script src="main-7XZRM4O4.js" type="module"></script></body>
+</html>
+`;
