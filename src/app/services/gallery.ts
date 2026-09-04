@@ -18,49 +18,49 @@ export class GalleryService {
   private defaultImages: GalleryImage[] = [{
     id: 1,
     title: 'Science Lab',
-    image: 'https://Google.com',
+    image: "assets/images/pic.jpg",
     category: 'Science'
   },
   {
     id: 2,
     title: 'Science Lab',
-    image: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=400&q=80',
+    image: 'assets/images/pic1.jpg',
     category: 'Facilities'
   },
   {
     id: 3,
     title: 'Sports Activities',
-    image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&q=80',
+    image: 'assets/images/pic1  .jpg',
     category: 'Sports'
   },
   {
     id: 4,
     title: 'Library',
-    image: 'https://images.unsplash.com/photo-1507842217343-583f20270319?w=400&q=80',
+    image: 'assets/images/pic5.jpg',
     category: 'Facilities'
   },
   {
     id: 5,
     title: 'Art Class',
-    image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&q=80',
+    image: 'assets/images/pic4.jpg',
     category: 'Arts'
   },
   {
     id: 6,
     title: 'School Event',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80',
+    image: 'assets/images/pic3.jpg',
     category: 'Events'
   },
   {
     id: 7,
     title: 'Outdoor Learning',
-    image: 'https://images.unsplash.com/photo-1577720643272-265e434a0834?w=400&q=80',
+    image: 'assets/images/pic2.jpg',
     category: 'Activities'
   },
   {
     id: 8,
     title: 'School Cafeteria',
-    image: 'https://images.unsplash.com/photo-1555939594-58d7cb561404?w=400&q=80',
+    image: 'assets/images/pic1.jpg',
     category: 'Facilities'
   }]
 

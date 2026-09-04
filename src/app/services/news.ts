@@ -24,42 +24,42 @@ export class NewsService {
       title: 'Science Fair 2026',
       description: 'Students showcase amazing science projects and experiments',
       date: 'March 15, 2026',
-      image: 'https://images.unsplash.com/photo-1427504494785-cdbeafc45b85?w=400&q=80'
+      image: 'assets/images/pic3.jpg'
     },
     {
       id: 2,
       title: 'Sports Day',
       description: 'Family sports event - All welcome! Great fun and competition',
       date: 'March 22, 2026',
-      image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&q=80'
+      image: 'assets/images/pic1.jpg'
     },
     {
       id: 3,
       title: 'New Lab Opened',
       description: 'State-of-the-art science lab ready for students to use',
       date: 'March 10, 2026',
-      image: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=400&q=80'
+      image: 'assets/images/pic5.jpg'
     },
     {
       id: 4,
       title: 'Cambridge Results',
       description: 'Excellent results in Cambridge International Examinations',
       date: 'March 5, 2026',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80'
+      image: 'assets/images/pic1.jpg'
     },
     {
       id: 5,
       title: 'Teacher Training',
       description: 'Staff development workshop on modern teaching methods',
       date: 'March 1, 2026',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80'
+      image: 'assets/images/pic5.jpg'
     },
     {
       id: 6,
       title: 'Student Achievement',
       description: 'Grade 6 student wins National Mathematics Olympiad',
       date: 'February 28, 2026',
-      image: 'https://images.unsplash.com/photo-1577720643272-265e434a0834?w=400&q=80'
+      image: 'assets/images/pic6.jpg'
     }
   ];
 
