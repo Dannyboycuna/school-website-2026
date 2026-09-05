@@ -78,8 +78,11 @@
   
           <div *ngFor="let item of newsList" class="list-item">
             <div class="item-image">
-              <img [src]="item.image" [alt]="item.title">
+
+              <img [src]="'http://localhost:3000' + item.image" [alt]="item.title" class="item">
             </div>
+
+            
             
             <div class="item-content">
               <h4>{{ item.title }}</h4>
@@ -159,7 +162,7 @@
   
           <div class="gallery-admin-grid">
             <div *ngFor="let image of galleryList" class="gallery-admin-item">
-              <img [src]="image.image" [alt]="image.title">
+              <img [src]="'http://localhost:3000' + image.image" [alt]="image.title" class="gallery-image">
               <div class="gallery-admin-info">
                 <h4>{{ image.title }}</h4>
                 <p class="category">{{ image.category }}</p>
@@ -235,7 +238,8 @@
           </div>
   
           <div *ngFor="let testimonial of testimonialsList" class="testimonial-admin-item">
-            <img [src]="testimonial.image" [alt]="testimonial.name" class="profile-img">
+          
+            <img [src]="'http://localhost:3000' + testimonial.image" [alt]="testimonial.name" class="profile-img">
             
             <div class="testimonial-content">
               <h4>{{ testimonial.name }}</h4>
@@ -249,6 +253,253 @@
           </div>
         </div>
       </div>
+
+     <!-- About -->
+      <!-- ABOUT PAGE MANAGEMENT -->
+<div *ngIf="activeTab === 'About'" class="tab-content">
+  <h2>Manage About Page</h2>
+
+  <!-- Update About Form -->
+  <div class="form-section" *ngIf="aboutData">
+    <h3>Update About Page</h3>
+    <form (ngSubmit)="updateAbout()" class="admin-form">
+      <textarea 
+        [(ngModel)]="aboutData.mission" 
+        name="mission"
+        placeholder="Mission Statement" 
+        rows="3" 
+        required></textarea>
+      
+      <textarea 
+        [(ngModel)]="aboutData.vision" 
+        name="vision"
+        placeholder="Vision Statement" 
+        rows="3" 
+        required></textarea>
+      
+      <textarea 
+        [(ngModel)]="aboutData.values" 
+        name="values"
+        placeholder="Core Values (comma separated)" 
+        rows="3" 
+        required></textarea>
+      
+      <!-- File upload (same pattern) -->
+      <div class="file-upload-wrapper">
+        <label for="campusImage" class="file-upload-label">
+          <i class="fas fa-upload"></i> Choose Campus Image
+        </label>
+        <input 
+          type="file" 
+          id="campusImage"
+          (change)="onAboutFileSelected($event)"
+          accept="image/*">
+        <span *ngIf="newAboutFile" class="file-name">{{ newAboutFile.name }}</span>
+      </div>
+
+      <!-- Preview -->
+      <div *ngIf="aboutData.campus_image" class="image-preview">
+        <img [src]="aboutData.campus_image" alt="Campus Preview" class="preview-thumbnail">
+      </div>
+      
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-save"></i> Update About Page
+      </button>
+    </form>
+  </div>
+
+  <!-- About Preview -->
+  <div class="about-preview" *ngIf="aboutData">
+    <h3>Preview</h3>
+    <div class="preview-card">
+      <h4>Mission</h4>
+      <p>{{ aboutData.mission }}</p>
+      
+      <h4>Vision</h4>
+      <p>{{ aboutData.vision }}</p>
+      
+      <h4>Values</h4>
+      <p>{{ aboutData.values }}</p>
+      
+      <h4>Campus Image</h4>
+      <img [src]="'http://localhost:3000' + aboutData.campus_image" alt="Campus" class="preview-image">
+    </div>
+  </div>
+</div>
+      <!-- About -->
+
+      <!-- Student -->
+<!-- STUDENTS MANAGEMENT -->
+<div *ngIf="activeTab === 'Students'" class="tab-content">
+  <h2>Manage Top 5 Students</h2>
+
+  <!-- Add Student Form -->
+  <div class="form-section">
+    <h3>Add New Student</h3>
+    <form (ngSubmit)="addStudent()" class="admin-form">
+      <input 
+        [(ngModel)]="newStudent.name" 
+        name="name"
+        type="text" 
+        placeholder="Student Name" 
+        required>
+      
+      <input 
+        [(ngModel)]="newStudent.grade" 
+        name="grade"
+        type="text" 
+        placeholder="Grade (e.g., Grade 6)" 
+        required>
+      
+      <textarea 
+        [(ngModel)]="newStudent.description" 
+        name="description"
+        placeholder="Achievement Description" 
+        rows="3" 
+        required></textarea>
+      
+      <!-- File upload (same pattern) -->
+      <div class="file-upload-wrapper">
+        <label for="studentImage" class="file-upload-label">
+          <i class="fas fa-upload"></i> Choose Student Photo
+        </label>
+        <input 
+          type="file" 
+          id="studentImage"
+          (change)="onStudentFileSelected($event)"
+          accept="image/*"
+          required>
+        <span *ngIf="newStudentFile" class="file-name">{{ newStudentFile.name }}</span>
+      </div>
+
+      <!-- Preview -->
+      <div *ngIf="newStudent.image" class="image-preview">
+        <img [src]="newStudent.image" alt="Preview" class="preview-thumbnail">
+      </div>
+      
+      <label class="checkbox-label">
+        <input 
+          [(ngModel)]="newStudent.is_featured" 
+          name="is_featured"
+          type="checkbox">
+        Mark as Featured (Top 5)
+      </label>
+      
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add Student
+      </button>
+    </form>
+  </div>
+
+  <!-- Students List -->
+  <div class="content-list">
+    <h3>All Students ({{ studentList.length }})</h3>
+    
+    <div *ngIf="studentList.length === 0" class="empty-state">
+      <p>No students added yet.</p>
+    </div>
+
+    <div class="students-admin-grid">
+      <div *ngFor="let student of studentList" class="student-admin-card">
+        <img [src]="'http://localhost:3000' + student.image" [alt]="student.name" class="student-photo">
+        
+        <div class="student-info">
+          <h4>{{ student.name }}</h4>
+          <p class="grade">{{ student.grade }}</p>
+          <p class="description">{{ student.description }}</p>
+          <span *ngIf="student.is_featured" class="badge-featured">
+            <i class="fas fa-star"></i> Featured
+          </span>
+        </div>
+        
+        <div class="student-actions">
+          <button (click)="deleteStudent(student.id)" class="btn btn-danger btn-sm">
+            <i class="fas fa-trash"></i> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <!-- Student -->
+
+      <!-- Fees -->
+      <div class="admin-page">
+        <div class="admin-header">
+          <h2>Manage School Fees</h2>
+        </div>
+      
+        <!-- Add Fee Form -->
+        <div class="fee-form">
+          <h3>Add New Fee</h3>
+          <div class="form-group">
+            <input type="text" placeholder="Grade Level" [(ngModel)]="newFee.grade_level">
+            <input type="text" placeholder="Curriculum" [(ngModel)]="newFee.curriculum">
+            <input type="number" placeholder="Amount" [(ngModel)]="newFee.amount">
+            <input type="text" placeholder="Currency" [(ngModel)]="newFee.currency">
+            <button class="btn btn-add" (click)="addFee()">Add Fee</button>
+          </div>
+        </div>
+      
+        <!-- Fees List -->
+        <div class="fees-admin-grid">
+          <div class="fees-admin-item" *ngFor="let fee of feesList">
+            
+            <!-- Content -->
+            <div class="fees-admin-info">
+              <h4>{{ fee.grade_level }}</h4>
+      
+              <div class="fee-row">
+                <span class="label">Curriculum</span>
+                <span class="value" *ngIf="editingFeeId !== fee.id">
+                  {{ fee.curriculum }}
+                </span>
+                <input *ngIf="editingFeeId === fee.id"
+                       type="text"
+                       class="edit-input"
+                       [(ngModel)]="editFeeForm.curriculum">
+              </div>
+      
+              <div class="fee-row">
+                <span class="label">Amount</span>
+                <span class="value" *ngIf="editingFeeId !== fee.id">
+                  {{ formatCurrency(fee.amount) }}
+                </span>
+                <input *ngIf="editingFeeId === fee.id"
+                       type="number"
+                       class="edit-input"
+                       [(ngModel)]="editFeeForm.amount">
+              </div>
+      
+              <div class="fee-row">
+                <span class="label">Currency</span>
+                <span class="value" *ngIf="editingFeeId !== fee.id">
+                  {{ fee.currency }}
+                </span>
+                <input *ngIf="editingFeeId === fee.id"
+                       type="text"
+                       class="edit-input"
+                       [(ngModel)]="editFeeForm.currency">
+              </div>
+            </div>
+      
+            <!-- Action buttons -->
+            <div class="btn-group">
+              <ng-container *ngIf="editingFeeId !== fee.id; else editingButtons">
+                <button class="btn btn-edit" (click)="startEditFee(fee)">Edit</button>
+                <button class="btn btn-delete" (click)="deleteFee(fee.id)">Delete</button>
+              </ng-container>
+      
+              <ng-template #editingButtons>
+                <button class="btn btn-save" (click)="updateFee(fee.id)">Update</button>
+                <button class="btn btn-cancel" (click)="cancelEditFee()">Cancel</button>
+              </ng-template>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+       <!-- Fees -->
   
     </div>
   </section>

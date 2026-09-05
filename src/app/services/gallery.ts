@@ -1,179 +1,64 @@
-import { Injectable,PLATFORM_ID, Inject } from '@angular/core';;
-import { isPlatformBrowser } from '@angular/common';
-
-
-export interface GalleryImage {
-  id: number;
-  title: string;
-  image: string;
-  category: string;
-}
+import { HttpClient } from "@angular/common/http";
+import { Injectable, signal } from "@angular/core";
+import { GalleryModel } from "../models/gallery.models";
+import { tap, map } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GalleryService {
-  private storageKey = 'schoolGallery';
-  private isBrowser:boolean;
-  private defaultImages: GalleryImage[] = [{
-    id: 1,
-    title: 'Science Lab',
-    image: "assets/images/pic.jpg",
-    category: 'Science'
-  },
-  {
-    id: 2,
-    title: 'Science Lab',
-    image: 'assets/images/pic1.jpg',
-    category: 'Facilities'
-  },
-  {
-    id: 3,
-    title: 'Sports Activities',
-    image: 'assets/images/pic1  .jpg',
-    category: 'Sports'
-  },
-  {
-    id: 4,
-    title: 'Library',
-    image: 'assets/images/pic5.jpg',
-    category: 'Facilities'
-  },
-  {
-    id: 5,
-    title: 'Art Class',
-    image: 'assets/images/pic4.jpg',
-    category: 'Arts'
-  },
-  {
-    id: 6,
-    title: 'School Event',
-    image: 'assets/images/pic3.jpg',
-    category: 'Events'
-  },
-  {
-    id: 7,
-    title: 'Outdoor Learning',
-    image: 'assets/images/pic2.jpg',
-    category: 'Activities'
-  },
-  {
-    id: 8,
-    title: 'School Cafeteria',
-    image: 'assets/images/pic1.jpg',
-    category: 'Facilities'
-  }]
 
-  private images: GalleryImage[] = [
-    {
-      id: 1,
-      title: 'Classroom Learning',
-      image: 'https://images.unsplash.com/photo-1427504494785-cdbeafc45b85?w=400&q=80',
-      category: 'Academics'
-    },
-    {
-      id: 2,
-      title: 'Science Lab',
-      image: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=400&q=80',
-      category: 'Facilities'
-    },
-    {
-      id: 3,
-      title: 'Sports Activities',
-      image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&q=80',
-      category: 'Sports'
-    },
-    {
-      id: 4,
-      title: 'Library',
-      image: 'https://images.unsplash.com/photo-150784272343-583f20270319?w=400&q=80',
-      category: 'Facilities'
-    },
-    {
-      id: 5,
-      title: 'Art Class',
-      image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&q=80',
-      category: 'Arts'
-    },
-    {
-      id: 6,
-      title: 'School Event',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80',
-      category: 'Events'
-    },
-    {
-      id: 7,
-      title: 'Outdoor Learning',
-      image: 'https://images.unsplash.com/photo-1577720643272-265e434a0834?w=400&q=80',
-      category: 'Activities'
-    },
-    {
-      id: 8,
-      title: 'School Cafeteria',
-      image: 'https://images.unsplash.com/photo-1555939594-58d7cb561404?w=400&q=80',
-      category: 'Facilities'
-    }
-  ];
+  public apiUrl = 'http://localhost:3000/api/gallery';
+  public gallery = signal<GalleryModel[] | null>(null);
 
-  constructor(@Inject(PLATFORM_ID) platformId: Object) {
-    this.isBrowser = isPlatformBrowser(platformId);
-    this.initializeStorage();
+  constructor(private http: HttpClient) {}
+
+  /**
+   * Always returns a real array, even if the backend wraps the data
+   */
+  public getAllImages(): Observable<GalleryModel[]> {
+    return this.http.get<any>(this.apiUrl).pipe(
+      map((response) => {
+        // Handle the most common backend formats
+        if (Array.isArray(response)) {
+          return response;
+        }
+        if (response?.data && Array.isArray(response.data)) {
+          return response.data;
+        }
+        if (response?.images && Array.isArray(response.images)) {
+          return response.images;
+        }
+
+        console.warn('Unexpected gallery response:', response);
+        return [];
+      }),
+      tap((images) => this.gallery.set(images))
+    );
   }
 
-  private initializeStorage(): void {
-    // if (typeof localStorage === 'undefined') {
-    //   console.warn('localStorage is not available');
-    //   return;
-    // }
-    if (!this.isBrowser) return;
-
-    
-    if (!localStorage.getItem(this.storageKey)) {
-      localStorage.setItem(this.storageKey, JSON.stringify(this.defaultImages));
-    }
+  public addImage(formData: FormData): Observable<any> {
+    return this.http.post(this.apiUrl, formData);
   }
 
-  getAllImages(): GalleryImage[] {
-// if(typeof localStorage ==='undefined'){
-//   return this.defaultImages;
-// }
-
-if(!this.isBrowser){
-  return this.defaultImages;
-}
-    const data = localStorage.getItem(this.storageKey);
-    return data ? JSON.parse(data) : this.defaultImages
+  public updateImage(id: number, image: GalleryModel): Observable<GalleryModel> {
+    return this.http.put<GalleryModel>(`${this.apiUrl}/${id}`, image);
   }
 
-  getImageByCategory(category: string): GalleryImage[] {
-        return this.getAllImages().filter(img => img.category === category);
-
+  public deleteImage(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  getAllCategories(): string[] {
-    return [...new Set(this.getAllImages().map(img => img.category))];
+  getImageByCategory(category: string): Observable<GalleryModel[]> {
+    return this.getAllImages().pipe(
+      map((images) => images.filter(img => img.category === category))
+    );
   }
 
-
-
-  addImage(item: GalleryImage): void {
-    if (!this.isBrowser) return;
-
-// if(typeof localStorage ==='undefined') return;
-
-    const images = this.getAllImages();
-    item.id = images.length > 0 ? Math.max(...images.map(img => img.id)) + 1 : 1
-    images.unshift(item)
-    localStorage.setItem(this.storageKey, JSON.stringify(images));
-  }
-
-  deleteImage(id: number): void {
-    if (!this.isBrowser) return;
-
-if(typeof localStorage==='undefined') return;
-
-    let images = this.getAllImages();
-    images.filter(item=>item.id !==id);
-    localStorage.setItem(this.storageKey, JSON.stringify(images));
+  getAllCategories(): Observable<string[]> {
+    return this.getAllImages().pipe(
+      map((images) => [...new Set(images.map(img => img.category))])
+    );
   }
 }

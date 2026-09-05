@@ -3,9 +3,9 @@
       <h2>What Parents Say</h2>
       
       <div class="testimonials-grid">
-        <div *ngFor="let testimonial of testimonials" class="testimonial-card">
+        <div *ngFor="let testimonial of allTestimonial" class="testimonial-card">
           <div class="testimonial-header">
-            <img [src]="testimonial.image" [alt]="testimonial.name" class="testimonial-image">
+            <img [src]="'http://localhost:3000' + testimonial.image" [alt]="testimonial.name" class="testimonial-image">
             <div class="testimonial-info">
               <h4>{{ testimonial.name }}</h4>
               <p class="role">{{ testimonial.role }}</p>
